@@ -1,0 +1,80 @@
+{% extends "home.html" %}
+
+
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+ 
+
+{%block head%}
+<title> Sign-Up/Login</title>
+{% load static %}
+<link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'css/login_register.css'%}"/>
+  <script  type="text/javascript" src="{% static '/logi_register.js' %}">
+   </script>
+  {%endblock%}
+
+
+
+</head>
+<body>
+
+  {%block content%}
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+  
+
+    <div class="form">
+      {% if messages %}
+  
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>{{message}}</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    {% endfor %}
+  
+  {% endif %}
+        <ul class="tab-group">
+            <li class="tab active"><a href="login">Log In</a></li>
+          <li class="tab"><a href="register">Sign Up</a></li>
+          
+        </ul>
+<div id="login">   
+    <h1>Welcome Back!</h1>
+    
+    <form action="" method="post">
+      {% csrf_token %}
+      <div class="field-wrap">
+      <label>
+        College Id<span class="req">*</span>
+      </label>
+      <input type="text" name='collegeid' required autocomplete="off"/>
+    </div>
+    
+    <div class="field-wrap">
+      <label>
+        Password<span class="req">*</span>
+      </label>
+      <input type="password" name='password' required autocomplete="off"/>
+    </div>
+    
+    <p class="forgot"><a href="#">Forgot Password?</a></p>
+    
+    <button class="button button-block">Log In</button>
+    
+    </form>
+
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+
+  </body>
+
+  {%endblock%}
+
+  </html>
