@@ -54,25 +54,36 @@ def register(request):
         collegeid=request.POST.get('collegeid')
         password=make_password(request.POST.get('password'))
         verify=False
-        for member in all_students:
-            if collegeid == member.college_id:
-                
-                messages.error(request,'Student with this College id already exists.Please Login using the same')
-                return render(request,'register.html')
-
-            elif email == member.email:
-                messages.error(request,'Account is already registered with this email.Use some other mail')
-                return render(request,'register.html')
-            else:
-                verify=True
-        if verify==True:
+        
+        if all_students.exists()==False:
+            print('In if all students')
             s1=Student(first_name=firstname,last_name=lastname,college_id=collegeid,email=email,password=password)
             s1.save()  
             print('Created a account')
             messages.success(request,'Succesfully created an account.Please Login')
-            
+                
             return render(request,'login.html')
-         
+            
+        else:
+            for member in all_students:
+                if collegeid == member.college_id:
+                    
+                    messages.error(request,'Student with this College id already exists.Please Login using the same')
+                    return render(request,'register.html')
+
+                elif email == member.email:
+                    messages.error(request,'Account is already registered with this email.Use some other mail')
+                    return render(request,'register.html')
+                else:
+                    verify=True
+            if verify==True:
+                s1=Student(first_name=firstname,last_name=lastname,college_id=collegeid,email=email,password=password)
+                s1.save()  
+                print('Created a account')
+                messages.success(request,'Succesfully created an account.Please Login')
+                
+                return render(request,'login.html')
+            
     
     return render(request,'register.html')
 
