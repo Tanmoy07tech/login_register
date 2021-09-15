@@ -1,0 +1,10 @@
+.home-page-button{
+    top:50%;
+    position:absolute;
+    left:10%;
+    margin-right:16px
+    
+}
+.home-page-button button{
+    margin-right:100px
+}
